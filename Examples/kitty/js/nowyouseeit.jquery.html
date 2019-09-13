@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Now You See It</title>
+
+    
+</head>
+
+<body>
+    <img id = "see" src="img/now-you-see-me.png" />
+    <div>
+        <button id='change'>hide</button>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        //let seeImage = document.getElementById('seeImage');
+        let seeImage = $("#see");
+        
+        let changeButton = document.getElementById('change');
+        changeButton.addEventListener('click', function(e) {
+            seeImage.setAttribute('src', 'img/now-you-dont.png');
+        })
+        
+        document
+            .getElementById('moon')
+            .addEventListener('click',function(e){
+                seeImage.setAttribute('class', 'hide');
+            })
+    </script>
+</body>
+
+</html>
