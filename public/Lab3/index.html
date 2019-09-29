@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset = "utf-8">
-        <title>US Quiz</title>
+        <title>US Geography Quiz</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" ></script>
@@ -33,7 +33,13 @@
                     $(`#q${index}Feedback`).html("Correct!");
                     $(`#q${index}Feedback`).attr("class", "bg-success text-white");
                     $(`#markImg${index}`).html("<img src = 'img/checkmark.png' alt = 'checkmark'>");
-                    score += 20;
+                    score += 12.5;
+                }
+                function rightAnswer2(index){
+                    $(`#q${index}Feedback`).html("Correct!");
+                    $(`#q${index}Feedback`).attr("class", "bg-success text-white");
+                    $(`#markImg${index}`).html("<img src = 'img/checkmark.png' alt = 'checkmark'>");
+                    score += 12.5;
                 }
                 function wrongAnswer(index){
                     $(`#q${index}Feedback`).html("Incorrect!");
@@ -49,6 +55,8 @@
                     let q1Response = $("#q1").val().toLowerCase();
                     let q2Response = $("#q2").val();
                     let q4Response = $("input[name=q4]:checked").val();
+                    let q6Response = $("#q6").val();
+                    let q7Response = $("#q7").val().trim();
                     if(q1Response == "sacramento")
                     {
                        rightAnswer(1);
@@ -81,7 +89,34 @@
                     else{
                         wrongAnswer(5);
                     }
-                    $("#totalScore").html(`Total Score: ${score}`);
+                    if(q6Response == "Sup")
+                    {
+                        rightAnswer2(6);
+                    }
+                    else{
+                        wrongAnswer(6);
+                    }
+                    if(q7Response == "1776")
+                    {
+                        rightAnswer2(7)
+                    }
+                    else{
+                        wrongAnswer(7)
+                    }
+                    if($("#Clinton").is(":checked") && $("#Johnson").is(":checked") && !$("#Nixon").is(":checked") && !$("#Trump").is(":checked")){
+                        rightAnswer(8);
+                    }
+                    else {
+                        wrongAnswer(8);
+                    }
+                  
+                    if(score < "80"){
+                       $("#totalScore").html(`Total Score: ${score}`).addClass("text-danger");
+
+                    }
+                    else{
+                      $("#totalScore").html(`Total Score: ${score}`).removeClass("text-danger");
+                    }
                 }
                 
             });//ready
@@ -123,6 +158,34 @@
         <img src = "img/seal3.png" alt = "Seal 3" class = "q5Choice" id = "seal3">
         <div id = "q5Feedback"></div>
         <br><br>
+        <h3><span id = "markImg6"></span>What is the largest lake in the US?</h3>
+        <select id="q6">
+            <option value = "">select a lake</otion>
+            <option value = "Heuron">Heuron</otion>
+            <option value = "Sup">Superior</otion>
+            <option value = "Erie">Erie</otion>
+            <option value = "Tahoe">Tahoe</otion>
+        </select>
+        <br>
+        <br>
+        <div id="q6Feedback"></div>
+        <br>
+        <br>
+        <h4><span id = "markImg7"></span>What year was the Declaration of Independance adopted</h4>
+        <input type = "text" id = "q7">
+        <br><br>
+        <div id = "q7Feedback"></div>
+        <br>
+        <br>
+         <h3><span id = "markImg8"></span>What presidents have been impeached?</h3>
+        <input type = "checkbox" id = "Trump">   <label for="Trump">D. Trump    </label>
+        <input type = "checkbox" id = "Nixon">  <label for="Nixon">R. Nixon  </label>
+        <input type = "checkbox" id = "Clinton"> <label for="Clinton">B. Clinton  </label>
+        <input type = "checkbox" id = "Johnson"> <label for="Johnson">A. Johnson  </label>
+        <br><br>
+        <div id = "q8Feedback"></div>
+        <br>
+        <br>
         <h3 id = "validationFdbk" class = "bg-danger text-white"></h3>
         <button type="button" class="btn btn-success"> Submit Quiz </button>
         <br>
