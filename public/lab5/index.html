@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab 5: Pixabay</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+
+            $("#button").on("click", getImages);
+
+            function getImages() {
+                // var search = $("")
+                console.log("button clicked!")
+                $.ajax({
+                    method: "GET",
+                    url: "https://pixabay.com/api/",
+                    dataType: "json",
+                    data: { key: "13944101-3c4d8b37070dcaa5cfa1493b6", q: $("#search").val(), orientation: $("#orientation").val(), image_type: "vector" },
+                    success: function(result, status) {
+                        var idx1 = Math.floor(Math.random() * (+result.hits.length - 1));
+                        var idx2 = Math.floor(Math.random() * (+result.hits.length - 1));
+                        var idx3 = Math.floor(Math.random() * (+result.hits.length - 1));
+                        var idx4 = Math.floor(Math.random() * (+result.hits.length - 1));
+
+                        $("#likes1").html("Likes: "+result.hits[idx1].likes);
+                        $("#img1").attr("src", result.hits[idx1].webformatURL);
+                        $("#likes2").html("Likes: "+result.hits[idx2].likes);
+                        $("#img2").attr("src", result.hits[idx2].webformatURL);
+                        $("#likes3").html("Likes: "+result.hits[idx3].likes);
+                        $("#img3").attr("src", result.hits[idx3].webformatURL);
+                        $("#likes4").html("Likes: "+result.hits[idx4].likes);
+                        $("#img4").attr("src", result.hits[idx4].webformatURL);
+                    }
+                });
+            };
+        });
+    </script>
+    <div class="text-center">
+        <h1> <strong>Pixabay Image Search</strong> </h1>
+        Keyword: <input id="search" type="text" name="search" />
+        <br>
+        <select id="orientation" class="dropdown">
+            <option id = "Vartical" value = "vertical">vertical</option>
+            <option id = "horizontal" value = "horizontal">horizontal</option>
+        </select>
+        <button id="button" class="btn btn-primary btn-sm">Search</button>
+    </div>
+    <hr>
+    <div id="pictureBox" class="d-flex flex-row justify-content-center">
+        <div id="img1box" class="text-center d-inline-block">
+            <h6><span id="likes1"></span></h6>
+            <img id=img1 height=200px>
+        </div>
+        <div id="img2box" class="text-center d-inline-block">
+            <h6><span id="likes2"></span></h6>
+            <img id=img2 height=200px>
+        </div>
+        <div id="img3box" class="text-center d-inline-block">
+            <h6><span id="likes3"></span></h6>
+            <img id=img3 height=200px>
+        </div>
+        <div id="img4box" class="text-center d-inline-block">
+            <h6><span id="likes4"></span></h6>
+            <img id=img4 height=200px>
+        </div>
+    </div>
+</body>
+
+</html>
